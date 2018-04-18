@@ -1,0 +1,35 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: s2_3 - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\yhy\LOCALS~1\Temp\RSP6E.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/s2_3.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"E:\个人信息\课件\C++\第2版\程序\第2章程序\s2_3\sclass2_3_date.cpp"
+"E:\个人信息\课件\C++\第2版\程序\第2章程序\s2_3\smain2_3.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\yhy\LOCALS~1\Temp\RSP6E.tmp" 
+Creating temporary file "C:\DOCUME~1\yhy\LOCALS~1\Temp\RSP6F.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/s2_3.pdb" /debug /machine:I386 /out:"Debug/s2_3.exe" /pdbtype:sept 
+".\Debug\sclass2_3_date.obj"
+".\Debug\smain2_3.obj"
+]
+Creating command line "link.exe @C:\DOCUME~1\yhy\LOCALS~1\Temp\RSP6F.tmp"
+<h3>Output Window</h3>
+Compiling...
+sclass2_3_date.cpp
+smain2_3.cpp
+Linking...
+
+
+
+<h3>Results</h3>
+s2_3.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
