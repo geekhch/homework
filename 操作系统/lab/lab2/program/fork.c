@@ -5,11 +5,11 @@
 int main(int argc,char*argv[])
 {
   int pid;
-  char *prog_argv[4];
+  char *prog_argv[4]; //字符串数组
 
-  prog_argv[0]="/bin/ls";
-  prog_argv[1]="-l";
-  prog_argv[2]="/";
+  prog_argv[0]="./p";
+  prog_argv[1]="";
+  prog_argv[2]="";
   prog_argv[3]=NULL;
 
   if ((pid=fork())<0)
@@ -27,4 +27,5 @@ int main(int argc,char*argv[])
   {
     waitpid(pid,NULL,0);
   }
+  return 0;
 }
