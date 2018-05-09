@@ -18,13 +18,14 @@ print("打开浏览器")
 driver.maximize_window()
 
 # 浏览器地址定向为qq登陆页面
-# driver.get("https://i.qq.com/")
+driver.get("https://user.qzone.qq.com/709531006?_t_=0.25959155230181474")
 
-# # # 所以这里需要选中一下frame，否则找不到下面需要的网页元素
-# # driver.switch_to.frame("login_frame")
+# # # # 所以这里需要选中一下frame，否则找不到下面需要的网页元素
+time.sleep(1)
+driver.switch_to.frame("login_frame")
 
-# # # 自动点击账号登陆方式
-# # driver.find_element_by_id("switcher_plogin").click()
+# # # # 自动点击账号登陆方式
+driver.find_element_by_id("img_out_709531006").click()
 
 # # # 账号输入框输入已知qq账号
 # # driver.find_element_by_id("u").send_keys(user)
@@ -39,7 +40,7 @@ driver.maximize_window()
 # # driver.switch_to.default_content()
 
 # # # 跳到说说的url, friend你可以任意改成你想访问的空间
-driver.get("http://user.qzone.qq.com/" + friend + "/311")
+driver.get("http://user.qzone.qq.com/" + friend)
 
 next_num = 0  # 初始“下一页”的id
 while True:

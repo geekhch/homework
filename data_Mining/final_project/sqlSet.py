@@ -16,7 +16,7 @@ class Mysql:
         '''更新数据数据'''
         try:
             m_cursor = self.m_conn.cursor()
-            print(self.Time()+sql)
+            # print(self.Time()+sql)
             m_cursor.execute(sql)
             self.m_conn.commit()
             m_cursor.close()
@@ -32,7 +32,7 @@ class Mysql:
             return result
             m_cursor.close()
         except:
-            print("%s更新数据库失败：" % self.Time() + sql)
+            print("%s查询数据库失败：" % self.Time() + sql)
 
     def Time(self):
         str = time.strftime("[%m-%d %H:%M]", time.localtime())
