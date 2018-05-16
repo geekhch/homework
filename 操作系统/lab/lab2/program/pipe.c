@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
       perror("Fork failed");
       exit(errno);
     }
-    if (!pid[1]) //父进程
+    if (!pid[1]) //子进程2
     {
       close(pipe_fd[1]);
       dup2(pipe_fd[0],0); 

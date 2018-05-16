@@ -1,15 +1,18 @@
 #include <iostream>
-#include "GetArea.h"
 using namespace std;
-/* ¼ÆËãÈı¸ö²»Í¬ÀàĞÍµÄÊıµÄ³Ë»ı£¬·µ»ØµÚÒ»¸öÊıµÄÀàĞÍµÄÖµ */
 
-int main(int argc, char** argv) {
-	double x = 1.5;
-	float y = 4.2;
-	int z = 3;
-	GetArea<double, float, int> m1(x,y,z);
-	GetArea<int, double, float> m2(z,x,y);
-	cout << m1.execute() << endl;
-	cout << m2.execute() << endl;
-	return 0;
+//è®¡ç®—ä»»æ„ç±»å‹æ•°çš„
+template <class T, class P>
+T square(P x)
+{
+    return (T)x*x;
+}
+
+int main()
+{
+    double y = 3.1;
+    //è¾“å‡ºç»“æœåˆ†åˆ«ä¸º9.61, 9,æ¨¡æ¿å‡½æ•°æ ¹æ®ä¼ è¾“ç±»å‹å‚æ•°ä¸åŒè€Œè¿”å›ä¸åŒå€¼
+    cout << square<float, double>(y) << endl;
+    cout << square<int, double>(y) << endl;
+    return 0;
 }
