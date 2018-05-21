@@ -42,4 +42,3 @@ with open('scuinfo.txt','a',encoding='utf-8') as f:
             f.write(str(item)+"\n")
         except:
             print("写入错误")
-
