@@ -1,0 +1,11 @@
+originalImage = im2double(imread('girl.jpg')); 
+h1 = fspecial('gaussian', 5, 2); 
+filteredImage = imfilter(originalImage, h1); 
+maskImage = filteredImage - originalImage; 
+alpha = 30; 
+sharpenedImg = originalImage - alpha * maskImage; 
+figure; 
+subplot(1,3,1); imshow(originalImage); title('Original Image'); 
+subplot(1,3,2); imshow((maskImage-min(maskImage(:)))/(max(maskImage(:))-min(maskImage(:)))); 
+title('Mask Image'); 
+subplot(1,3,3); imshow(sharpenedImg); title('Sharpened Image'); 
