@@ -58,7 +58,7 @@ handles.im = im;
 guidata(hObject, handles);
 % Choose default command line output for GUI
 handles.output = hObject;
-
+handles.action = '选择功能';
 % Update handles structure
 guidata(hObject, handles);
 
@@ -92,6 +92,8 @@ function open_img_Callback(hObject, eventdata, handles)
 [filename,pathname] = uigetfile('*.jpg;*.png;*.bmp','选择图像');
 imgName = fullfile(pathname,filename);
 im = imread(imgName);
+handles.im=im;
+guidata(hObject, handles);
 axes(handles.inputImg);
 imshow(im);
 
@@ -109,6 +111,7 @@ function menu_select_Callback(hObject, eventdata, handles)
 contents = cellstr(get(hObject,'String')); % 获取下拉菜单信息
 action = contents{get(hObject,'Value')}; % 返回所选项
 handles.action = action;
+guidata(hObject, handles);
 switch action 
     case '选择功能'
     case '增强 Laplacian'
@@ -146,7 +149,6 @@ function menu_select_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to menu_select (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-
 % Hint: popupmenu controls usually have a white background on Windows.
 %       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
@@ -160,11 +162,18 @@ function run_Callback(hObject, eventdata, handles)
 % hObject    handle to run (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-switch handles.action 
+set(handles.run, 'enable', 'off'); 
+switch (handles.action)
     case '选择功能'
-        messageBox('请选择一个功能！');
+        msgbox('请选择一个功能！');
     case '增强 Laplacian'
         % pass
+        h1 = [1 1 1; 1 -8 1; 1 1 1]; 
+        originalImage = im2double(handles.im);
+        filteredImage = imfilter(originalImage, h1); 
+        sharpenedImg = originalImage - filteredImage;
+        axes(handles.outputImg);
+        imshow(sharpenedImg);
     case '去噪 NLM'
         contents = cellstr(get(handles.nlm_1,'String')); % 获取下拉菜单信息
         nm_1 = str2double(contents{get(hObject,'Value')}); % 返回所选项
@@ -174,7 +183,9 @@ switch handles.action
         nm_3 = str2double(contents{get(hObject,'Value')}); % 返回所选项
         contents = cellstr(get(handles.nlm_4,'String')); % 获取下拉菜单信息
         nm_4 = str2double(contents{get(hObject,'Value')}); % 返回所选项
-        
+        im = fast_nlm(im2double(handles.im),nm_1,nm_2,nm_3,nm_3,nm_4);
+        axes(handles.outputImg);
+        imshow(im);
     case '复原 Wiener'
         contents = cellstr(get(handles.wiener_1,'String')); % 获取下拉菜单信息
         wn_1 = str2double(contents{get(hObject,'Value')}); % 返回所选项
@@ -182,8 +193,15 @@ switch handles.action
         wn_2 = str2double(contents{get(hObject,'Value')}); % 返回所选项
         contents = cellstr(get(handles.wiener_3,'String')); % 获取下拉菜单信息
         wn_3 = str2double(contents{get(hObject,'Value')}); % 返回所选项
+        
+        I = im2double(handles.im);
+        PSF = fspecial('motion', wn_1, wn_2);
+        signal_var = var(I(:));
+        wnr3 = deconvwnr(I, PSF, wn_3 / signal_var);
+        axes(handles.outputImg);
+        imshow(wnr3);
 end 
-
+set(handles.run, 'enable', 'on'); 
 
 
 
