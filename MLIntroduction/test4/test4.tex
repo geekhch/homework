@@ -1,0 +1,30 @@
+% !Mode:: "Tex:UTF-8"
+\documentclass{xcumcmart}
+\usepackage{setspace}
+\usepackage{enumerate}
+\usepackage{graphics}
+\usepackage{tabu}
+
+% \title{text}这里是显示在第三页的文章标题
+\title{机器学习引论作业一}
+\author{何长鸿 2016141482154}
+
+\linespread{1.2} %行距
+% \setlength{\parskip}{1.2em} %1.4倍段落距离
+
+\begin{document}
+\renewcommand\arraystretch{2}
+\maketitle
+\section{Question1}
+\textbf{Q:}What is the classification? How to perform classification by human? And what is the simplest way?\\
+\par \textbf{A:}Classification is a process related to categorization, the process in which ideas and objects are recognized, differentiated, and understood. People perform classification by distinguish the charactors of the objects to be classified. The simplest way to perform classification is calssifying obejects into different classes if they have different characters.
+
+\section{Question2}
+\textbf{Q:}What problem of 1NN is addressed by kNN?\\
+\par \textbf{A:}We have knew that KNN determine the class of a object with its k nearest neighbors, that means an object is classified by a plurality vote of its neighbors, with the object being assigned to the class most common among its k nearest neighbors (k is a positive integer, typically small). If k = 1, then the object is simply assigned to the class of that single nearest neighbor, \uline{it's easily effected by the noise. Generally, the larger value of k reduces the effect of noise on the classification}, but make boundarries between classes less distinct.
+
+\section{Question3}
+\textbf{Q:}How to(why) incorporate the distance into classical kNN? And what will be benefited from it?\\
+\par \textbf{A:}A drawback of the basic "majority voting" classification occurs when the class distribution is skewed. The weighted nearest neighbour classifier incorporates distance into classification. For example, We assign $w_i = frac{1}{distance_i}$ to i-th neighbor, the nearer neighbors have larger weight. By incorparate the distace into classical kNN, the algorithm is more robust.
+
+\end{document}
