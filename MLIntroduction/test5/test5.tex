@@ -1,0 +1,25 @@
+% !Mode:: "Tex:UTF-8"
+\documentclass{xcumcmart}
+\usepackage{setspace}
+\usepackage{enumerate}
+\usepackage{graphics}
+\usepackage{tabu}
+
+% \title{text}这里是显示在第三页的文章标题
+\title{机器学习引论作业二}
+\author{何长鸿 2016141482154}
+
+\linespread{1.2} %行距
+% \setlength{\parskip}{1.2em} %1.4倍段落距离
+
+\begin{document}
+\renewcommand\arraystretch{2}
+\maketitle
+\section{Question1}
+\textbf{Q:}Who is Vladimir N. Vapnik?\\
+\par \textbf{A:}He is one of the main developers of the Vapnik–Chervonenkis theory of statistical learning,[1] and the co-inventor of the support-vector machine method, and support-vector clustering algorithm.
+
+\section{Question2}
+\textbf{Q:}How to compute the distance between a given data point to the boundary?\\
+\par \textbf{A:}For the i-th point $x_i$ in data, we caculate the distance from point to the hyperplane with the expression $$r=\frac{W^Tx_i+b}{||W||}$$ where $W$ is weights of the hyperplane, $b$ is the constant term.
+\end{document}
