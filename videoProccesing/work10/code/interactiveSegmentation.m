@@ -53,7 +53,7 @@ function interactiveSegmentation_OpeningFcn(hObject, eventdata, handles, varargi
 % varargin   command line arguments to interactiveSegmentation (see VARARGIN)
 %% initialization 
 % input image  
-handles.im = im2double(imread('1.jpg')); 
+handles.im = im2double(imread('4.jpg')); 
 % text  
 set(handles.edit_numClusters, 'String', '2'); 
 % number of clusters 
@@ -138,7 +138,7 @@ function pushbutton_seg_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 [cls, dp] = size(handles.pixs);
 [row,col,depth] = size(handles.im);
-
+d_wight=0.7; %设置位置信息权重
 % 根据划线坐标提取轨迹数据点
 trace = {};
 for i=1:cls
@@ -148,7 +148,11 @@ for i=1:cls
     for j=1:num
         p = handles.pixs{i}(j,:);
         if p(1)>0 && p(1)<482 && p(2)>0 && p(2)<322
-            trace{i} = [trace{i};[handles.im(p(1),p(2),1) handles.im(p(1),p(2),2) handles.im(p(1),p(2),3) p(1)/col p(2)/row]];
+            try
+                trace{i} = [trace{i};[handles.im(p(2),p(1),1) handles.im(p(2),p(1),2) handles.im(p(2),p(1),3) d_wight*p(1)/col d_wight*p(2)/row]];
+            catch
+                disp(p)
+            end
         end
     end
 end
@@ -158,27 +162,46 @@ centers = zeros(cls,5);
 for i=1:cls
     centers(i,:) = mean(trace{i});
 end
-color = [1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1;1 1 1;0 0 0];
+color = [1 0 0;0 1 0;0 0 1;1 1 0;0 0 0;1 1 1;1 0 1];
 % 像素点増广坐标位置
 points = zeros(row*col,5);
 id = 1;
+
 for y=1:row
     for x=1:col
-        points(id,:) = [handles.im(y,x,1) handles.im(y,x,2) handles.im(y,x,3) x/col y/row];
+        points(id,:) = [handles.im(y,x,1) handles.im(y,x,2) handles.im(y,x,3) d_wight*x/col d_wight*y/row];
         id = id + 1;
     end
 end
 
 % k-means
 updated = 1;
-while updated==1
+out_img = zeros(row,col,3);
+c1num = 0;
+while updated == 1
     IDX = knnsearch(centers,points);
-    bi = reshape(color(IDX,:),row,col,3);
+    id = 1;
+    for i=1:row
+        for j=1:col
+            out_img(i,j,:) = color(IDX(id),:);
+            id = id+1;
+        end
+    end
     axes(handles.axes_output); 
-    imshow(bi); 
-    updated = 0;
+    imshow(out_img);  % 实时显示迭代状态
+    pause(0.001);
+    % 重新计算中心
+    for i=1:cls
+        centers(i,:) = mean(points(IDX==i));
+    end
+    % 判断类型1的点数目是否发生变化从而终止迭代
+    if sum(IDX==1)==0 || abs(sum(IDX==1)-c1num)/c1num<0.03 % 允许一定变化率以避免微小震荡
+        updated=0;
+    else
+        c1num = sum(IDX==1);
+    end
 end
-
+imwrite(out_img,'out_4.jpg');
 guidata(hObject, handles); 
 
 % --- Executes on mouse press over figure background, over a disabled or
