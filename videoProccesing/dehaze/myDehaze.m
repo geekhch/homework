@@ -97,7 +97,7 @@ function p3_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % open('output.fig')
-run imagedehaze\demo
+run image_dehaze\demo
 
 % --- Executes on button press in pushbutton5.
 function pushbutton5_Callback(hObject, eventdata, handles)
@@ -105,7 +105,7 @@ function pushbutton5_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-run non-local-dehazing\demo_non_local_dehazing.m
+run non-local-dehazing_\demo_non_local_dehazing.m
 
 
 % --- Executes on button press in togglebutton1.
